@@ -4,21 +4,35 @@ import NoProjectSelected from "./components/NoProjectSelected";
 import ProjectsSidebar from "./components/ProjectsSidebar";
 
 function App() {
-  const [projectsState, isSetProjectsState] = useState({
+  const [projectsState, setProjectsState] = useState({
     selectedProjectId: undefined,
     projectsList: [],
   });
 
   const handleCreateProject = () => {
-    isSetProjectsState((prev) => {
-      return { prev, selectedProjectId: null };
+    setProjectsState((prev) => {
+      return { ...prev, selectedProjectId: null };
+    });
+  };
+
+  const handleAddProject = (projectData) => {
+    setProjectsState((prev) => {
+      const newProject = {
+        ...projectData,
+        id: prev.projectsList.length + 1,
+      };
+
+      return {
+        ...prev,
+        projectsList: [...prev.projectsList, newProject],
+      };
     });
   };
 
   let content;
 
   if (projectsState.selectedProjectId === null) {
-    content = <NewProject />;
+    content = <NewProject onAdd={handleAddProject} />;
   } else if (projectsState.selectedProjectId === undefined) {
     content = <NoProjectSelected onCreate={handleCreateProject} />;
   }

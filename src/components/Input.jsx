@@ -1,5 +1,5 @@
 export default function Input(props) {
-  const { label, textarea, ...prop } = props;
+  const { label, textarea, ref, ...prop } = props;
   const stylingClass =
     "w-full p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600";
 
@@ -9,9 +9,9 @@ export default function Input(props) {
         {label}
       </label>
       {textarea ? (
-        <textarea className={stylingClass} {...prop} />
+        <textarea className={stylingClass} ref={ref} {...prop} />
       ) : (
-        <input className={stylingClass} {...prop} />
+        <input className={stylingClass} ref={ref} {...prop} />
       )}
     </p>
   );
