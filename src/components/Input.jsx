@@ -9,9 +9,9 @@ export default function Input(props) {
         {label}
       </label>
       {textarea ? (
-        <textarea className={stylingClass} {...props} />
+        <textarea className={stylingClass} {...prop} />
       ) : (
-        <input className={stylingClass} {...props} />
+        <input className={stylingClass} {...prop} />
       )}
     </p>
   );
