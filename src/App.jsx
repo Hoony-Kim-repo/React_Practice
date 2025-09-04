@@ -24,6 +24,7 @@ function App() {
 
       return {
         ...prev,
+        selectedProjectId: undefined,
         projectsList: [...prev.projectsList, newProject],
       };
     });
@@ -39,7 +40,10 @@ function App() {
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <ProjectsSidebar onCreate={handleCreateProject} />
+      <ProjectsSidebar
+        onCreate={handleCreateProject}
+        projects={projectsState.projectsList}
+      />
 
       {content}
     </main>
