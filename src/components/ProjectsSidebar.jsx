@@ -1,4 +1,4 @@
-import CreateProjectButton from "./CreateProjectButton";
+import Button from "./Button";
 
 export default function ProjectsSidebar(props) {
   const { projects, onCreate, ...prop } = props;
@@ -7,9 +7,9 @@ export default function ProjectsSidebar(props) {
     <aside className="w-1/3 px-8 py-16 bg-stone-900 text-stone-50 md:w-72 rounded-r-xl">
       <h2 className="mb-8 font-bold uppercase md:text-xl">Your Projects</h2>
       <div>
-        <CreateProjectButton onCreate={onCreate} {...prop}>
+        <Button onCreate={onCreate} {...prop}>
           + Add Project
-        </CreateProjectButton>
+        </Button>
       </div>
       <ul className="mt-8">
         {projects.map((project) => (

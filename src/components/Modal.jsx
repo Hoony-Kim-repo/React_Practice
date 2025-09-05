@@ -1,5 +1,6 @@
 import { useImperativeHandle, useRef } from "react";
 import { createPortal } from "react-dom";
+import Button from "./Button";
 
 export default function Modal(props) {
   const { ref, buttonCaption, children, ...prop } = props;
@@ -15,10 +16,13 @@ export default function Modal(props) {
   });
 
   return createPortal(
-    <dialog ref={dialogRef}>
+    <dialog
+      ref={dialogRef}
+      className="backdrop:bg-stone-900/90 p-4 rounded-md shadow-md"
+    >
       {children}
-      <form method="dialog">
-        <button>{buttonCaption}</button>
+      <form method="dialog" className="mt-4 text-right">
+        <Button>{buttonCaption}</Button>
       </form>
     </dialog>,
     document.getElementById("modal-root")

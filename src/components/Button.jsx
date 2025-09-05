@@ -1,4 +1,4 @@
-export default function CreateProjectButton(props) {
+export default function Button(props) {
   const { onCreate, children, ...prop } = props;
   return (
     <button
