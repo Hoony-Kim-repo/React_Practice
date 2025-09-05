@@ -1,11 +1,11 @@
 import { CartContext } from "../store/shopping-cart-context";
 import { use } from "react";
 
-export default function Cart({ onUpdateItemQuantity }) {
+export default function Cart() {
   const cartCtx = use(CartContext);
 
   const totalPrice = cartCtx.items.reduce(
-    (acc) => acc + cartCtx.items.price * cartCtx.items.quantity,
+    (acc, items) => acc + items.price * items.quantity,
     0
   );
   const formattedTotalPrice = `$${totalPrice.toFixed(2)}`;
@@ -25,11 +25,15 @@ export default function Cart({ onUpdateItemQuantity }) {
                   <span> ({formattedPrice})</span>
                 </div>
                 <div className="cart-item-actions">
-                  <button onClick={() => onUpdateItemQuantity(item.id, -1)}>
+                  <button
+                    onClick={() => cartCtx.updateCartItemQuantity(item.id, -1)}
+                  >
                     -
                   </button>
                   <span>{item.quantity}</span>
-                  <button onClick={() => onUpdateItemQuantity(item.id, 1)}>
+                  <button
+                    onClick={() => cartCtx.updateCartItemQuantity(item.id, 1)}
+                  >
                     +
                   </button>
                 </div>
