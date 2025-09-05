@@ -1,5 +1,15 @@
+import Tasks from "./Tasks";
+
 export default function SelectedProject(props) {
-  const { project, children, onDelete, ...prop } = props;
+  const {
+    project,
+    children,
+    onDelete,
+    onAddTask,
+    onDeleteTask,
+    tasks,
+    ...prop
+  } = props;
 
   const formattedDate = new Date(project.dueDate).toLocaleDateString("en-US", {
     year: "numeric",
@@ -28,7 +38,7 @@ export default function SelectedProject(props) {
           {project.description}
         </p>
       </header>
-      TASKS
+      <Tasks tasks={tasks} onAdd={onAddTask} onDelete={onDeleteTask} />
     </div>
   );
 }
