@@ -1,19 +1,32 @@
 import { useRef } from "react";
 import Input from "./Input";
+import Modal from "./Modal";
 
 export default function NewProject(props) {
   const { onAdd, ...prop } = props;
 
+  const modal = useRef();
+
   const projectTitle = useRef();
   const projectDesc = useRef();
   const projectDueDate = useRef();
+
+  let errorModal;
 
   const handleNewProjectSave = () => {
     const title = projectTitle.current.value;
     const description = projectDesc.current.value;
     const dueDate = projectDueDate.current.value;
 
-    // Todo: Validation
+    if (
+      title.trim() === "" ||
+      description.trim() === "" ||
+      dueDate.trim() === ""
+    ) {
+      modal.current.open();
+      errorModal = <Modal ref={modal} />;
+      return;
+    }
 
     onAdd({ title, description, dueDate });
   };
@@ -41,6 +54,9 @@ export default function NewProject(props) {
         <Input label="Description" textarea ref={projectDesc} />
         <Input type="date" label="Due Date" ref={projectDueDate} />
       </div>
+      <Modal ref={modal} buttonCaption="Close">
+        <p>Error Happened</p>
+      </Modal>
     </div>
   );
 }
