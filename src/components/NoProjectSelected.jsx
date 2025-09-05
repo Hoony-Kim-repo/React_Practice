@@ -1,5 +1,5 @@
 import noProjectImg from "../assets/no-projects.png";
-import CreateProjectButton from "./Button";
+import Button from "./Button";
 
 export default function NoProjectSelected(props) {
   const { onCreate, ...prop } = props;
@@ -17,9 +17,7 @@ export default function NoProjectSelected(props) {
         Select a project or get started with a new one
       </p>
       <p className="mt-8">
-        <CreateProjectButton onCreate={onCreate}>
-          Create New Project
-        </CreateProjectButton>
+        <Button onCreate={onCreate}>Create New Project</Button>
       </p>
     </div>
   );
