@@ -1,9 +1,10 @@
-import { useRef } from "react";
+import { use, useRef } from "react";
 import Input from "./Input";
 import Modal from "./Modal";
+import { ProjectContext } from "../store/project-context";
 
-export default function NewProject(props) {
-  const { onAdd, onCancel, ...prop } = props;
+export default function NewProject() {
+  const projectContext = use(ProjectContext);
 
   const modal = useRef();
 
@@ -28,7 +29,7 @@ export default function NewProject(props) {
       return;
     }
 
-    onAdd({ title, description, dueDate });
+    projectContext.addProject({ title, description, dueDate });
   };
 
   return (
@@ -37,7 +38,7 @@ export default function NewProject(props) {
         <li>
           <button
             className="text-stone-800 hoverLtext-stone-950"
-            onClick={onCancel}
+            onClick={projectContext.cancelAddProject}
           >
             Cancel
           </button>
