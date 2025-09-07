@@ -4,16 +4,13 @@ export const ProjectContext = createContext({
   idList: [],
   selectedProjectId: undefined,
   projectsList: [],
-  tasks: [],
 });
 
 const projectsStateReducer = (state, action) => {
   switch (action.type) {
     case "MOVE_TO_CREATE_PROJECT_PAGE":
-      console.log("MOVE_TO_CREATE_PROJECT_PAGE action dispatched");
       return { ...state, selectedProjectId: null };
     case "ADD_PROJECT":
-      console.log("ADD_PROJECT action dispatched");
       // Generate ID for the new project
       // ID starts from 1 and increments by 1 for each new project
       const updatedProjectsState = { ...state };
@@ -36,13 +33,10 @@ const projectsStateReducer = (state, action) => {
 
       return { ...updatedProjectsState, selectedProjectId: undefined };
     case "CANCEL_ADD_PROJECT":
-      console.log("CANCEL_ADD_PROJECT action dispatched");
       return { ...state, selectedProjectId: undefined };
     case "SELECT_PROJECT":
-      console.log("SELECT_PROJECT action dispatched");
       return { ...state, selectedProjectId: action.payload };
     case "DELETE_PROJECT":
-      console.log("DELETE_PROJECT action dispatched");
       return {
         ...state,
         selectedProjectId: undefined,
@@ -61,7 +55,6 @@ export default function ProjectContextProvider({ children }) {
     idList: [],
     selectedProjectId: undefined,
     projectsList: [],
-    tasks: [],
   });
 
   const moveToCreateProjectPage = () => {

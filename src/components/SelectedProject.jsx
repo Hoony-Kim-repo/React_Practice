@@ -3,8 +3,6 @@ import Tasks from "./Tasks";
 import { ProjectContext } from "../store/project-context";
 
 export default function SelectedProject(props) {
-  const { onAddTask, onDeleteTask, tasks } = props;
-
   const projectContext = use(ProjectContext);
   const project = projectContext.projectsList.find(
     (project) => project.id === projectContext.selectedProjectId
@@ -37,7 +35,7 @@ export default function SelectedProject(props) {
           {project.description}
         </p>
       </header>
-      {/* <Tasks tasks={tasks} onAdd={onAddTask} onDelete={onDeleteTask} /> */}
+      <Tasks />
     </div>
   );
 }

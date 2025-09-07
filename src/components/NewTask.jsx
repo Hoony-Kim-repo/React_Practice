@@ -1,7 +1,13 @@
+import { use } from "react";
 import { useState } from "react";
+import { TaskContext } from "../store/task-context";
+import { ProjectContext } from "../store/project-context";
 
 export default function NewTask(props) {
-  const { onAdd, onDelete, ...prop } = props;
+  const { onAdd, ...prop } = props;
+
+  const taskContext = use(TaskContext);
+  const projectContext = use(ProjectContext);
 
   const [task, setTask] = useState("");
 
@@ -14,7 +20,25 @@ export default function NewTask(props) {
       return;
     }
 
-    onAdd(task);
+    const savedIdList = taskContext.tasks
+      .filter((task) => task.projectId === projectContext.selectedProjectId)
+      .map((task) => task.id);
+
+    let newId = 1;
+    while (true) {
+      if (!savedIdList.includes(newId)) {
+        break;
+      }
+      newId++;
+    }
+
+    const newTask = {
+      id: newId,
+      text: task,
+      projectId: projectContext.selectedProjectId,
+    };
+
+    taskContext.addTask(newTask);
     setTask("");
   };
 
