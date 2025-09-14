@@ -10,7 +10,7 @@ export default function Login() {
     event.preventDefault();
 
     const enteredEmail = email.current.value;
-    const enteredPassword = password.current.value;
+    // const enteredPassword = password.current.value;
 
     const emailIsValid = enteredEmail.includes("@");
 
