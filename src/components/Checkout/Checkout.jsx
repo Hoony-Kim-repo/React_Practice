@@ -22,6 +22,7 @@ const Checkout = () => {
     isLoading: isSending,
     error,
     sendRequest,
+    clearData,
   } = useHttp(`${import.meta.env.VITE_SERVER_URL}/orders`, requestConfig);
 
   const cartTotal = cartContext.items.reduce(
@@ -36,6 +37,7 @@ const Checkout = () => {
   const onOrderFinish = () => {
     progressContext.hideCheckout();
     cartContext.clearCart();
+    clearData;
   };
 
   const onSubmit = (event) => {
