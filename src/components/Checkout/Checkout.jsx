@@ -6,7 +6,7 @@ import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Modal from "../UI/Modal";
 
-const Checkout = ({ item }) => {
+const Checkout = () => {
   const cartContext = useContext(CartContext);
   const progressContext = useContext(UserProgressContext);
 
@@ -19,13 +19,31 @@ const Checkout = ({ item }) => {
     progressContext.hideCheckout();
   };
 
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const clientData = Object.fromEntries(formData.entries());
+
+    fetch(`${import.meta.env.VITE_SERVER_URL}/orders`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        order: {
+          items: cartContext.items,
+          customer: clientData,
+        },
+      }),
+    });
+  };
+
   return (
     <Modal open={progressContext.progress === "checkout"} onClose={onClose}>
-      <form>
+      <form onSubmit={onSubmit}>
         <h2>Checkout</h2>
         <p>Total Amount: {currencyFormatter.format(cartTotal)}</p>
 
-        <Input label="Full Name" type="text" id="full-name" />
+        <Input label="Full Name" type="text" id="name" />
         <Input label="E-mail Address" type="email" id="email" />
         <Input label="Street" type="text" id="street" />
         <div className="control-row">
