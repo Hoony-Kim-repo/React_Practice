@@ -1,24 +1,23 @@
-import { useEffect, useState } from "react";
+import useHttp from "../../hooks/useHttp";
+import Error from "../Error/Error";
 import MealItem from "./MealItem";
 
+const requestConfig = {};
+
 const Meals = () => {
-  const [meals, setMeals] = useState([]);
+  const {
+    data: meals,
+    isLoading,
+    error,
+  } = useHttp(`${import.meta.env.VITE_SERVER_URL}/meals`, requestConfig, []);
 
-  const fetchMeals = async () => {
-    const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/meals`);
+  if (isLoading) {
+    return <p className="center">Fetching meals...</p>;
+  }
 
-    if (!response.ok) {
-      return;
-    }
-
-    const data = await response.json();
-
-    setMeals(data);
-  };
-
-  useEffect(() => {
-    fetchMeals();
-  }, []);
+  if (error) {
+    return <Error title="Failed to fetch meals" message={error} />;
+  }
 
   return (
     <ul id="meals">
