@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useActionState, useContext } from "react";
 import useHttp from "../../hooks/useHttp";
 import { CartContext } from "../../store/CartContext";
 import { UserProgressContext } from "../../store/UserProgressContext";
@@ -17,13 +17,10 @@ const Checkout = () => {
   const cartContext = useContext(CartContext);
   const progressContext = useContext(UserProgressContext);
 
-  const {
-    data,
-    isLoading: isSending,
-    error,
-    sendRequest,
-    clearData,
-  } = useHttp(`${import.meta.env.VITE_SERVER_URL}/orders`, requestConfig);
+  const { data, error, sendRequest, clearData } = useHttp(
+    `${import.meta.env.VITE_SERVER_URL}/orders`,
+    requestConfig
+  );
 
   const cartTotal = cartContext.items.reduce(
     (totalPrice, item) => totalPrice + item.quantity * item.price,
@@ -32,21 +29,19 @@ const Checkout = () => {
 
   const onClose = () => {
     progressContext.hideCheckout();
+    clearData();
   };
 
   const onOrderFinish = () => {
     progressContext.hideCheckout();
     cartContext.clearCart();
-    clearData;
+    clearData();
   };
 
-  const onSubmit = (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
+  const checkoutAction = async (prevState, formData) => {
     const clientData = Object.fromEntries(formData.entries());
 
-    sendRequest(
+    await sendRequest(
       JSON.stringify({
         order: {
           items: cartContext.items,
@@ -55,6 +50,11 @@ const Checkout = () => {
       })
     );
   };
+
+  const [_formState, formAction, pending] = useActionState(
+    checkoutAction,
+    null
+  );
 
   let actions = (
     <>
@@ -65,7 +65,7 @@ const Checkout = () => {
     </>
   );
 
-  if (isSending) actions = <span>Sending order Data...</span>;
+  if (pending) actions = <span>Sending order Data...</span>;
 
   if (data && !error) {
     return (
@@ -88,7 +88,7 @@ const Checkout = () => {
 
   return (
     <Modal open={progressContext.progress === "checkout"} onClose={onClose}>
-      <form onSubmit={onSubmit}>
+      <form action={formAction}>
         <h2>Checkout</h2>
         <p>Total Amount: {currencyFormatter.format(cartTotal)}</p>
 
