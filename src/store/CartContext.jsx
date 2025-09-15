@@ -72,8 +72,6 @@ const CartContextProvider = ({ children }) => {
     removeItem,
   };
 
-  console.log(cartContext);
-
   return <CartContext value={cartContext}>{children}</CartContext>;
 };
 
