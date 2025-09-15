@@ -18,8 +18,16 @@ const Cart = () => {
     progressContext.hideCart();
   };
 
+  const onMoveToCheckout = () => {
+    progressContext.showCheckout();
+  };
+
   return (
-    <Modal className="Cart" open={progressContext.progress === "cart"}>
+    <Modal
+      className="Cart"
+      open={progressContext.progress === "cart"}
+      onClose={progressContext.progress === "cart" ? onCloseCart : null}
+    >
       <h2>Your Cart</h2>
 
       <ul>
@@ -40,7 +48,9 @@ const Cart = () => {
         <Button textOnly onClick={onCloseCart}>
           Close
         </Button>
-        <Button onClick={onCloseCart}>Go to Checkout</Button>
+        {cartContext.items.length > 0 && (
+          <Button onClick={onMoveToCheckout}>Go to Checkout</Button>
+        )}
       </p>
     </Modal>
   );
