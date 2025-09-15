@@ -1,4 +1,5 @@
 import { currencyFormatter } from "../util/formatting";
+import Button from "./UI/Button";
 
 const MealItem = (prop) => {
   const { meal } = prop;
@@ -20,7 +21,7 @@ const MealItem = (prop) => {
         </div>
 
         <p className="meal-item-actions">
-          <button>Add to Cart</button>
+          <Button>Add to Cart</Button>
         </p>
       </article>
     </li>
