@@ -1,7 +1,7 @@
 // import { Component } from "react";
 // import { connect } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
-import { counterActions } from "../store/redux";
+import { counterActions } from "../store/redux/counter-slice";
 import classes from "./Counter.module.css";
 
 const Counter = () => {
