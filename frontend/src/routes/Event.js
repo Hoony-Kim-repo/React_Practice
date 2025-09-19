@@ -1,6 +1,6 @@
 import EventLayout from "../layouts/EventLayout";
 import EditEvent from "../pages/EditEvent";
-import EventDetail from "../pages/EventDetail";
+import EventDetail, { loader as eventDetailLoader } from "../pages/EventDetail";
 import Events, { loadEvent } from "../pages/Events";
 import NewEvent from "../pages/NewEvent";
 
@@ -17,6 +17,7 @@ const EventRoutes = [
       {
         path: ":id",
         Component: EventDetail,
+        loader: eventDetailLoader,
       },
       {
         path: "new",
