@@ -1,8 +1,7 @@
 import EventLayout from "../layouts/EventLayout";
-import { loadEvent } from "../loaders/EventLoader";
 import EditEvent from "../pages/EditEvent";
 import EventDetail from "../pages/EventDetail";
-import Events from "../pages/Events";
+import Events, { loadEvent } from "../pages/Events";
 import NewEvent from "../pages/NewEvent";
 
 const EventRoutes = [
