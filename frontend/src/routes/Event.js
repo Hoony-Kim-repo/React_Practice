@@ -1,3 +1,4 @@
+import { action as manipulateEventAction } from "../components/EventForm";
 import EventLayout from "../layouts/EventLayout";
 import EditEvent from "../pages/EditEvent";
 import EventDetail, {
@@ -5,7 +6,7 @@ import EventDetail, {
   loader as eventDetailLoader,
 } from "../pages/EventDetail";
 import Events, { loadEvent } from "../pages/Events";
-import NewEvent, { action as newEventAction } from "../pages/NewEvent";
+import NewEvent from "../pages/NewEvent";
 
 const EventRoutes = [
   {
@@ -30,13 +31,14 @@ const EventRoutes = [
           {
             path: "edit",
             Component: EditEvent,
+            action: manipulateEventAction,
           },
         ],
       },
       {
         path: "new",
         Component: NewEvent,
-        action: newEventAction,
+        action: manipulateEventAction,
       },
     ],
   },
