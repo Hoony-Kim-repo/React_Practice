@@ -1,4 +1,4 @@
-import EventForm from "../components/EventForm";
+import EventForm from "../components/Event/EventForm";
 
 const NewEvent = () => {
   return <EventForm method="post" />;

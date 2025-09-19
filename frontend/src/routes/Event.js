@@ -1,4 +1,4 @@
-import { action as manipulateEventAction } from "../components/EventForm";
+import { action as manipulateEventAction } from "../components/Event/EventForm";
 import EventLayout from "../layouts/EventLayout";
 import EditEvent from "../pages/EditEvent";
 import EventDetail, {

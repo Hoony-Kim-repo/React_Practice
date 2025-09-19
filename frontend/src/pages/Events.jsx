@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import EventsList from "../components/EventsList";
+import EventsList from "../components/Event/EventsList";
 
 const Events = () => {
   const { events } = useLoaderData();

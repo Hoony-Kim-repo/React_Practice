@@ -1,7 +1,8 @@
 import RootLayout from "../layouts/RootLayout";
+import Error from "../pages/Error";
 import Home from "../pages/Home";
 import EventRoutes from "./Event";
-import Error from "../pages/Error";
+import NewsletterRoutes from "./Newsletter";
 
 const RootRoutes = [
   {
@@ -14,6 +15,7 @@ const RootRoutes = [
         Component: Home,
       },
       ...EventRoutes,
+      ...NewsletterRoutes,
     ],
   },
 ];

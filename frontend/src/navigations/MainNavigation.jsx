@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+
+import NewsletterSignup from "../components/NewsLetter/NewsletterSignup";
 import classes from "./MainNavigation.module.css";
 
 function MainNavigation() {
@@ -12,6 +14,7 @@ function MainNavigation() {
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
+              end
             >
               Home
             </NavLink>
@@ -26,8 +29,19 @@ function MainNavigation() {
               Events
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/newsletter"
+              className={({ isActive }) =>
+                isActive ? classes.active : undefined
+              }
+            >
+              Newsletter
+            </NavLink>
+          </li>
         </ul>
       </nav>
+      <NewsletterSignup />
     </header>
   );
 }

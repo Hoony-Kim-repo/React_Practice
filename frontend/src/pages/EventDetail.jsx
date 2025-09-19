@@ -1,5 +1,5 @@
 import { redirect, useRouteLoaderData } from "react-router-dom";
-import EventItem from "../components/EventItem";
+import EventItem from "../components/Event/EventItem";
 
 const EventDetail = () => {
   const data = useRouteLoaderData("event-detail");
