@@ -16,16 +16,22 @@ const EventRoutes = [
       },
       {
         path: ":id",
-        Component: EventDetail,
+        id: "event-detail",
         loader: eventDetailLoader,
+        children: [
+          {
+            index: true,
+            Component: EventDetail,
+          },
+          {
+            path: "edit",
+            Component: EditEvent,
+          },
+        ],
       },
       {
         path: "new",
         Component: NewEvent,
-      },
-      {
-        path: ":id/edit",
-        Component: EditEvent,
       },
     ],
   },
