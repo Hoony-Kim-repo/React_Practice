@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import EventsList from "../components/EventsList";
 
 const Events = () => {
-  const events = useLoaderData();
+  const { events } = useLoaderData();
 
   return <EventsList events={events} />;
 };
@@ -13,10 +13,10 @@ const loadEvent = async () => {
   const response = await fetch("http://localhost:8080/events");
 
   if (!response.ok) {
-    // ...Error case
+    throw new Response("Failed to fetch events", { status: response.status });
   } else {
     const resData = await response.json();
-    return resData.events;
+    return { events: resData.events };
   }
 };
 
