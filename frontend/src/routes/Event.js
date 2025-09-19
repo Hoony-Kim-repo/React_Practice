@@ -1,6 +1,9 @@
 import EventLayout from "../layouts/EventLayout";
 import EditEvent from "../pages/EditEvent";
-import EventDetail, { loader as eventDetailLoader } from "../pages/EventDetail";
+import EventDetail, {
+  action as deleteEventAction,
+  loader as eventDetailLoader,
+} from "../pages/EventDetail";
 import Events, { loadEvent } from "../pages/Events";
 import NewEvent, { action as newEventAction } from "../pages/NewEvent";
 
@@ -22,6 +25,7 @@ const EventRoutes = [
           {
             index: true,
             Component: EventDetail,
+            action: deleteEventAction,
           },
           {
             path: "edit",
