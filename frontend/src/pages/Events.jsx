@@ -13,7 +13,9 @@ const loadEvent = async () => {
   const response = await fetch("http://localhost:8080/events");
 
   if (!response.ok) {
-    throw new Response("Failed to fetch events", { status: response.status });
+    throw new Response(JSON.stringify({ message: "Could not fetch events." }), {
+      status: response.status,
+    });
   } else {
     const resData = await response.json();
     return { events: resData.events };
