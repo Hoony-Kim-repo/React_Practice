@@ -14,4 +14,12 @@ const tokenLoader = () => {
   return getAuthToken();
 };
 
-export { getAuthToken, action as logout, tokenLoader };
+const checkAuthLoader = () => {
+  const token = getAuthToken();
+
+  if (!token) return redirect("/auth");
+
+  return null;
+};
+
+export { checkAuthLoader, getAuthToken, action as logout, tokenLoader };

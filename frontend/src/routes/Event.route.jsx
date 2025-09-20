@@ -7,6 +7,7 @@ import EventDetailPage, {
 } from "../pages/event/EventDetail";
 import EventsPage, { loader as eventsLoader } from "../pages/event/Events";
 import NewEventPage from "../pages/event/NewEvent";
+import { checkAuthLoader } from "../util/auth";
 
 const eventIdRoutes = {
   path: ":eventId",
@@ -22,6 +23,7 @@ const eventIdRoutes = {
       path: "edit",
       Component: EditEventPage,
       action: manipulateEventAction,
+      loader: checkAuthLoader,
     },
   ],
 };
@@ -40,6 +42,7 @@ const eventRoute = {
       path: "new",
       Component: NewEventPage,
       action: manipulateEventAction,
+      loader: checkAuthLoader,
     },
   ],
 };
