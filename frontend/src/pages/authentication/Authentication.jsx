@@ -34,13 +34,14 @@ const action = async ({ request }) => {
   }
 
   if (!response.ok) {
-    throw new Response(
-      { message: "Could not authenticate user." },
-      { status: 500 }
-    );
+    throw new Response("Could not authenticate user.", { status: 500 });
   }
 
-  // TODO: manage the token,
+  const resData = await response.json();
+  const token = resData.token;
+
+  localStorage.setItem("token", token);
+
   return redirect("/");
 };
 

@@ -15,12 +15,12 @@ const eventIdRoutes = {
   children: [
     {
       index: true,
-      element: EventDetailPage,
+      Component: EventDetailPage,
       action: deleteEventAction,
     },
     {
       path: "edit",
-      element: EditEventPage,
+      Component: EditEventPage,
       action: manipulateEventAction,
     },
   ],
