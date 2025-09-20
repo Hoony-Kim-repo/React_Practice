@@ -10,4 +10,8 @@ const action = () => {
   return redirect("/");
 };
 
-export { getAuthToken, action as logout };
+const tokenLoader = () => {
+  return getAuthToken();
+};
+
+export { getAuthToken, action as logout, tokenLoader };
