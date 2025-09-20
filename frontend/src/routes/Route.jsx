@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "../layout/Root";
 import ErrorPage from "../pages/Error";
 import HomePage from "../pages/Home";
+import authRoute from "./Auth.route";
 import eventRoute from "./Event.route";
 import newsletterRoute from "./Newsletter.route";
 
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
       { index: true, Component: HomePage },
       eventRoute,
       newsletterRoute,
+      authRoute,
     ],
   },
 ]);
