@@ -3,14 +3,14 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    es2021: true, // 최신 버전으로 통일
+    es2021: true,
   },
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
-    "prettier", // 마지막에 배치
+    "prettier",
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parserOptions: {
