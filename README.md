@@ -7,3 +7,4 @@
 3. Copy and paste jsconfigjson.txt content into the jsconfig.json file of root directory of newly created project.
 4. Close Visual Studio Code completely, and open again.
 5. Run npm run lint to check it occurs an error or not.
+6. Run npx npm-check-updates -u
