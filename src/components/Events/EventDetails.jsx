@@ -1,8 +1,8 @@
 import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { deleteEvent, fetchEvent } from "../../util/http.js";
+import { deleteEvent, fetchEvent, queryClient } from "../../util/http.js";
 import Header from "../Header.jsx";
 import ErrorBlock from "../UI/ErrorBlock.jsx";
 import Modal from "../UI/Modal.jsx";
@@ -13,7 +13,6 @@ export default function EventDetails() {
   const params = useParams();
   const id = params.id;
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   const {
     data: queryData,
