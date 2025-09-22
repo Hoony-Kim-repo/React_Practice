@@ -1,20 +1,75 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-import Modal from '../UI/Modal.jsx';
-import EventForm from './EventForm.jsx';
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { fetchEvent, updateEvent } from "../../util/http.js";
+import ErrorBlock from "../UI/ErrorBlock.jsx";
+import LoadingIndicator from "../UI/LoadingIndicator.jsx";
+import Modal from "../UI/Modal.jsx";
+import EventForm from "./EventForm.jsx";
 
 export default function EditEvent() {
   const navigate = useNavigate();
+  const params = useParams();
+  const {
+    data: queryData,
+    isPending: isQueryPending,
+    isError: isQueryError,
+    error: queryError,
+  } = useQuery({
+    queryKey: ["events", params.id],
+    queryFn: ({ signal }) => fetchEvent({ id: params.id, signal }),
+  });
 
-  function handleSubmit(formData) {}
+  const {
+    mutate,
+    isPending: isMutatePending,
+    isError: isMutateError,
+    error: mutateError,
+  } = useMutation({
+    mutationFn: updateEvent,
+  });
 
-  function handleClose() {
-    navigate('../');
+  function handleSubmit(formData) {
+    mutate({ id: params.id, event: formData });
+    navigate("..");
   }
 
-  return (
-    <Modal onClose={handleClose}>
-      <EventForm inputData={null} onSubmit={handleSubmit}>
+  function handleClose() {
+    navigate("..");
+  }
+
+  let content;
+
+  if (isQueryPending) {
+    content = (
+      <div className="center">
+        <LoadingIndicator />
+      </div>
+    );
+  }
+
+  if (isQueryError) {
+    content = (
+      <>
+        <ErrorBlock
+          title="Failed to load event"
+          message={
+            queryError.info?.message ||
+            "Failed to load event. Please check your inputs and try again later."
+          }
+        />
+        <div className="form-actions">
+          <Link to="../" className="button">
+            Okay
+          </Link>
+        </div>
+      </>
+    );
+  }
+
+  if (queryData) {
+    content = (
+      <EventForm inputData={queryData} onSubmit={handleSubmit}>
         <Link to="../" className="button-text">
           Cancel
         </Link>
@@ -22,6 +77,8 @@ export default function EditEvent() {
           Update
         </button>
       </EventForm>
-    </Modal>
-  );
+    );
+  }
+
+  return <Modal onClose={handleClose}>{content}</Modal>;
 }

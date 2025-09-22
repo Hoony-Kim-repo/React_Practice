@@ -21,7 +21,7 @@ export default function EventDetails() {
     isError: isQueryError,
     error: queryError,
   } = useQuery({
-    queryKey: ["eventDetail", id],
+    queryKey: ["events", id],
     queryFn: ({ signal }) => fetchEvent({ signal, id }),
   });
 
