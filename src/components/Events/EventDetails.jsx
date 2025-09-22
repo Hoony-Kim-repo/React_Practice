@@ -17,14 +17,18 @@ export default function EventDetails() {
     isError: isQueryError,
     error: queryError,
   } = useQuery({
-    queryKey: ["eventDetail"],
+    queryKey: ["eventDetail", id],
     queryFn: ({ signal }) => fetchEvent({ signal, id }),
   });
 
   const { mutate } = useMutation({
     mutationFn: deleteEvent,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["events"], exact: true });
+      queryClient.invalidateQueries({
+        queryKey: ["events"],
+        exact: true,
+        refetchType: "none",
+      });
       navigate("..");
     },
   });
