@@ -1,12 +1,13 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
-import { createNewEvent, queryClient } from "../../util/http.js";
+import { createNewEvent } from "../../util/http.js";
 import ErrorBlcok from "../UI/ErrorBlock.jsx";
 import Modal from "../UI/Modal.jsx";
 import EventForm from "./EventForm.jsx";
 
 export default function NewEvent() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: createNewEvent,
