@@ -16,15 +16,22 @@ export default function WelcomePage() {
   const yHero = useTransform(scrollY, [0, 200], [0, -150]);
   const opacityHero = useTransform(scrollY, [0, 300, 500], [1, 1, 0]);
 
-  const yText = useTransform(scrollY, [0, 200, 300, 500], [0, 50, 50, 300]);
-  const scaleText = useTransform(scrollY, [0, 300], [1, 1.5]);
+  const yText = useTransform(scrollY, [0, 200, 300, 500], [200, 0, 0, 0]);
+  const scaleText = useTransform(scrollY, [0, 300, 500], [1, 1.5, 0.5]);
 
   return (
     <>
       <header id="welcome-header">
         <motion.div
           id="welcome-header-content"
-          style={{ scale: scaleText, y: yText }}
+          style={{
+            scale: scaleText,
+            y: yText,
+            position: "fixed",
+            top: "-50px",
+            transform: "translateX(-50%)",
+            zIndex: 100,
+          }}
         >
           <h1>Ready for a challenge?</h1>
           <Link id="cta-link" to="/challenges">
